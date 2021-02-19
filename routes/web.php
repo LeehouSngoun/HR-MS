@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/attendance' ,'AttendanceController@index');
+Route::get('/cadidate' ,'CadidateController@index');
+Route::get('/interview' ,'InterviewController@index');
+Route::get('/employee' ,'EmployeeController@index');
+Route::get('/overtime' ,'OvertimeController@index');
+Route::get('/salary' ,'SalaryController@index');
+Route::get('/position' ,'PositionController@index');
+Route::get('/schedule' ,'SchedulesController@index');
+Route::get('/user' ,'UserController@index');
+Route::get('/department' ,'DepartmentController@index');
+Route::get('/role' ,'RoleController@index');
+Route::get('/pwd' ,'PasswordController@index');

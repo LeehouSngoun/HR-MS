@@ -1,4 +1,4 @@
-@include('layouts.header')
+{{-- @include('layouts.header') --}}
 <header class="main-header">
     <!-- Logo -->
     <a href="/" class="logo">
