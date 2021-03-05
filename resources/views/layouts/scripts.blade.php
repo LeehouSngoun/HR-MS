@@ -50,10 +50,10 @@
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
-      'searching'   : false,
+      'searching'   : true,
       'ordering'    : false,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : false,
     })
   })
 </script>

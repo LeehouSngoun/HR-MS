@@ -37,6 +37,7 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i> 
             </div>
+            <h3>100</h3>
             <a href="/employee" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
@@ -46,13 +47,14 @@
           <div class="small-box bg-green">
             <div class="inner">
               
-          
+              
               <p>Employees Birthday</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="/birthday" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <h3>0</h3>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -61,12 +63,14 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               
-             
+              
               <p>On Time Today</p>
+              
             </div>
             <div class="icon">
               <i class="ion ion-clock"></i>
             </div>
+            <h3>10</h3>
             <a href="/attendance" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
@@ -76,12 +80,14 @@
           <div class="small-box bg-red">
             <div class="inner">
               
-
+              
               <p>Late Today</p>
+              
             </div>
             <div class="icon">
               <i class="ion ion-alert-circled"></i>
             </div>
+            <h3>1</h3>
             <a href="/attendance" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>

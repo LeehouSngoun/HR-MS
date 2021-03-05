@@ -1,4 +1,4 @@
-<footer class="main-footer">
+<footer id="main-footer" class="main-footer">
     <div class="pull-right hidden-xs">
       <b>@<a href="#">PAPA</a></b>
     </div>

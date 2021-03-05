@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class PasswordController extends Controller
 {
     function index(){
-        return view('password');
+        return view('Password.password');
     }
 }

@@ -8,25 +8,24 @@
             	<h4 class="modal-title"><b>Add Position</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_add.php">
-          		  
-					<div class="form-group">
-						<label for="employee" class="col-sm-3 control-label">Position</label>
-  
-						<div class="col-sm-9">
-						  <input type="text" class="form-control" id="employee" name="employee" required>
-						</div>
-				  </div>
-                
-                 <div class="form-group">
-                    <label for="rate" class="col-sm-3 control-label">Department</label>
+            	<form class="form-horizontal" method="POST" action="/add_pos">
+					@csrf
+          		  <div class="form-group">
+                  	<label for="title" class="col-sm-3 control-label">Position Title <span class="text-danger">*</span></label>
+
+                  	<div class="col-sm-9">
+                    	<input type="text" class="form-control" id="title" name="position" required>
+                  	</div>
+                </div>
+                <div class="form-group">
+                    <label for="rate" class="col-sm-3 control-label">Department <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <select name="department" id="" class="form-control">
-						  <option value="">IT</option>
-						  <option value="">Commercial</option>
-						  <option value="">Digital</option>
-					  </select>
+						<select class="form-control" name="department_id" id="">
+							@foreach($departments as $dep)
+							<option value="{{ $dep->id }}">{{ $dep->department }}</option>
+							@endforeach
+						</select>
                     </div>
                 </div>
           	</div>
@@ -46,39 +45,35 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b><span class="employee_name"></span></b></h4>
+            	<h4 class="modal-title"><b>Update Position</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_edit.php">
-            		<input type="hidden" class="otid" name="id">
+            	<form class="form-horizontal" method="POST" id="edit_pos_action">
+					@csrf
+					@method('PUT')
+            		<input type="hidden" id="posid" name="id">
                 <div class="form-group">
-                    <label for="datepicker_edit" class="col-sm-3 control-label">Date</label>
+                    <label for="position" class="col-sm-3 control-label">Position Title <span class="text-danger">*</span></label>
 
-                    <div class="col-sm-9"> 
-                      <div class="date">
-                        <input type="text" class="form-control" id="datepicker_edit" name="date" required>
-                      </div>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="edit_position" name="position">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="hours_edit" class="col-sm-3 control-label">No. of Hours</label>
+                    <label for="edit_rate" class="col-sm-3 control-label">Department <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="hours_edit" name="hours">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="mins_edit" class="col-sm-3 control-label">No. of Mins</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="mins_edit" name="mins">
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <label for="rate_edit" class="col-sm-3 control-label">Rate</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="rate_edit" name="rate" required>
+						<select class="form-control" name="department_id" id="edit_department_id">
+							@foreach($departments as $dep)
+							<option value="{{ $dep->id }}"
+								@if($dep->id === $pos->department_id)
+									selected ="selected"
+									{{-- value="{{ $dep->id }}" --}}
+								@endif
+								{{-- value="{{ $pos->department_id }}" --}}
+							>{{ $dep->department }}</option>
+							@endforeach
+						</select>
                     </div>
                 </div>
           	</div>
@@ -98,14 +93,16 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b><span id="overtime_date"></span></b></h4>
+            	<h4 class="modal-title"><b>Deleting...</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_delete.php">
-            		<input type="hidden" class="otid" name="id">
+            	<form class="form-horizontal" id="del_pos_action" method="POST" >
+					@csrf
+					@method('DELETE')
+            		<input type="hidden" id="del_posid" name="id">
             		<div class="text-center">
-	                	<p>DELETE OVERTIME</p>
-	                	<h2 class="employee_name bold"></h2>
+	                	<p >DELETE POSITION</p>
+	                	<h2 id="del_pos" class="bold"></h2>
 	            	</div>
           	</div>
           	<div class="modal-footer">

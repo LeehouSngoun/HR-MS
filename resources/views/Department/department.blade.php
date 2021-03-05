@@ -36,11 +36,17 @@
                   <th>Tools</th>
                 </thead>
                 <tbody>
-                  <td></td>
-                  <td>
-                    <button class="btn btn-success btn-sm edit btn-flat" data-id=""><i class="fa fa-edit"></i> Edit</button>
-                    <button class="btn btn-danger btn-sm delete btn-flat" data-id=""><i class="fa fa-trash"></i> Delete</button>
-                  </td>
+                  @foreach($departments as $dep)
+                  <tr>
+                    <td>{{ $dep->department }}</td>
+                    <td>
+                      <button class="btn btn-success btn-sm btn-flat" data-toggle="modal" data-target="#edit" data-mydepartment="{{ $dep->department }}"><i class="fa fa-edit"></i> Edit</button>
+                      {{-- <button class="btn btn-success btn-sm edit btn-flat" data-toggle="modal" data-target="#edit" data-mydepartment="hello" data-id="{{ $dep->id }}"><i class="fa fa-edit"></i> Edit</button> --}}
+                      {{-- <a href="{{ $dep->id }}"><button class="btn btn-danger btn-sm delete btn-flat" data-id=""><i class="fa fa-trash"></i> Delete</button></a> --}}
+                      <button class="btn btn-danger btn-sm btn-flat" data-toggle="modal" data-target="#delete" data-mydepartment="{{ $dep->department }}"><i class="fa fa-trash"></i> Delete</button>
+                    </td>
+                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -56,19 +62,33 @@
 @include('layouts.scripts')
 <script>
 $(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+  // $('.edit').click(function(e){
+  //   e.preventDefault();
+  //   $('#edit').modal('show');
+  //   var id = $(this).data('myDep');
+  //   getRow(id);
+  // });
+  $('#edit').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var department = button.data('mydepartment') 
+  var modal = $(this)
+  modal.find('.modal-body #dep_edit').val(department)
+})
 
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+  // $('.delete').click(function(e){
+  //   e.preventDefault();
+  //   $('#delete').modal('show');
+  //   var id = $(this).data('id');
+  //   getRow(id);
+  // });
+
+  $('#delete').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var department = button.data('mydepartment') 
+  var modal = $(this)
+  modal.find('.modal-body #dep_del').text('Delete ' + department + '?')
+})
+
 });
 
 function getRow(id){

@@ -8,46 +8,40 @@
             	<h4 class="modal-title"><b>Add Employee</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="employee_add.php" enctype="multipart/form-data">
+            	<form class="form-horizontal" method="POST" action="/employee_add" enctype="multipart/form-data">
+                @csrf
           		  <div class="form-group">
-                  	<label for="firstname" class="col-sm-3 control-label">Firstname</label>
+                  	<label for="first_name" class="col-sm-3 control-label">Firstname <span class="text-danger">*</span></label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="firstname" name="firstname" required>
+                    	<input type="text" class="form-control" id="first_name" name="first_name" required>
                   	</div>
                 </div>
                 <div class="form-group">
-                  	<label for="lastname" class="col-sm-3 control-label">Lastname</label>
+                  	<label for="last_name" class="col-sm-3 control-label">Lastname <span class="text-danger">*</span></label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="lastname" name="lastname" required>
+                    	<input type="text" class="form-control" id="last_name" name="last_name" required>
                   	</div>
                 </div>
                 <div class="form-group">
-                  	<label for="address" class="col-sm-3 control-label">Address</label>
-
-                  	<div class="col-sm-9">
-                      <textarea class="form-control" name="address" id="address"></textarea>
-                  	</div>
-                </div>
-                <div class="form-group">
-                  	<label for="datepicker_add" class="col-sm-3 control-label">Birthdate</label>
+                  	<label for="datepicker_add" class="col-sm-3 control-label">Birthdate <span class="text-danger">*</span></label>
 
                   	<div class="col-sm-9"> 
                       <div class="date">
-                        <input type="text" class="form-control" id="datepicker_add" name="birthdate">
+                        <input type="text" class="form-control" id="datepicker_add" name="birthdate" required>
                       </div>
                   	</div>
                 </div>
                 <div class="form-group">
-                    <label for="contact" class="col-sm-3 control-label">Contact Info</label>
+                    <label for="contact" class="col-sm-3 control-label">Contact Info <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="contact" name="contact">
+                      <input type="text" class="form-control" id="contact" name="contact" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="gender" class="col-sm-3 control-label">Gender</label>
+                    <label for="gender" class="col-sm-3 control-label">Gender <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9"> 
                       <select class="form-control" name="gender" id="gender" required>
@@ -58,22 +52,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="position" class="col-sm-3 control-label">Position</label>
+                    <label for="position_id" class="col-sm-3 control-label">Position </label>
 
                     <div class="col-sm-9">
-                      <select class="form-control" name="position" id="position" required>
-                        <option value="" selected>- Select -</option>
-                        
+                      <select class="form-control" name="position_id" id="position_id">
+                        @foreach($positions as $pos)
+                          <option value="{{ $pos->id }}" >{{ $pos->position }}</option>
+                        @endforeach
                       </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="schedule" class="col-sm-3 control-label">Schedule</label>
+                    <label for="schedule_id" class="col-sm-3 control-label">Schedule</label>
 
                     <div class="col-sm-9">
-                      <select class="form-control" id="schedule" name="schedule" required>
-                        <option value="" selected>- Select -</option>
-                        
+                      <select class="form-control" id="schedule_id" name="schedule_id">
+                        @foreach($schedules as $scd)
+                        <option value="{{ $scd->id }}" >{{ $scd->start_time ." - ". $scd->end_time }}</option>
+                        @endforeach
                       </select>
                     </div>
                 </div>
@@ -84,6 +80,41 @@
                       <input type="file" name="photo" id="photo">
                     </div>
                 </div>
+                <div class="form-group">
+                  <label for="identity" class="col-sm-3 control-label">Identity Card <span class="text-danger">*</span></label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="identity" name="identity" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email <span class="text-danger">*</span></label>
+
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+                <div class="form-group">
+                  <label for="address" class="col-sm-3 control-label">Address <span class="text-danger">*</span></label>
+
+                  <div class="col-sm-9">
+                    <textarea class="form-control" name="address" id="address" required></textarea>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="address" class="col-sm-3 control-label">Education</label>
+
+                <div class="col-sm-9">
+                  <textarea class="form-control" name="education" id="education"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-3 control-label">Skill</label>
+
+              <div class="col-sm-9">
+                <textarea class="form-control" name="skill" id="skill"></textarea>
+              </div>
+          </div>
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -104,50 +135,60 @@
             	<h4 class="modal-title"><b><span class="employee_id"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="employee_edit.php">
+            	<form class="form-horizontal" method="POST" id="edit_emp_action">
+                @csrf
+                @method('PUT')
             		<input type="hidden" class="empid" name="id">
                 <div class="form-group">
-                    <label for="edit_firstname" class="col-sm-3 control-label">Firstname</label>
+                    <label for="edit_firstname" class="col-sm-3 control-label">Firstname <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_firstname" name="firstname">
+                      <input type="text" class="form-control" id="edit_firstname" name="first_name" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_lastname" class="col-sm-3 control-label">Lastname</label>
+                    <label for="edit_lastname" class="col-sm-3 control-label">Lastname <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_lastname" name="lastname">
+                      <input type="text" class="form-control" id="edit_lastname" name="last_name" required>
                     </div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="edit_address" class="col-sm-3 control-label">Address</label>
-
-                    <div class="col-sm-9">
-                      <textarea class="form-control" name="address" id="edit_address"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="datepicker_edit" class="col-sm-3 control-label">Birthdate</label>
+                    <label for="datepicker_edit" class="col-sm-3 control-label">Birthdate <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9"> 
                       <div class="date">
-                        <input type="text" class="form-control" id="datepicker_edit" name="birthdate">
+                        <input type="date" class="form-control" id="edit_birthdate" name="birthdate" required>
                       </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_contact" class="col-sm-3 control-label">Contact Info</label>
+                  <label for="edit_identity" class="col-sm-3 control-label">Identity <span class="text-danger">*</span></label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="edit_identity" name="identity" required>
+                  </div>
+              </div>
+                <div class="form-group">
+                    <label for="edit_contact" class="col-sm-3 control-label">Contact Info <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_contact" name="contact">
+                      <input type="text" class="form-control" id="edit_contact" name="contact" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_gender" class="col-sm-3 control-label">Gender</label>
+                  <label for="edit_email" class="col-sm-3 control-label">Email <span class="text-danger">*</span></label>
+
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" id="edit_email" name="email" required>
+                  </div>
+              </div>
+                <div class="form-group">
+                    <label for="edit_gender" class="col-sm-3 control-label">Gender <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9"> 
-                      <select class="form-control" name="gender" id="edit_gender">
+                      <select class="form-control" name="gender" id="edit_gender" required>
                         <option selected id="gender_val"></option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -158,9 +199,14 @@
                     <label for="edit_position" class="col-sm-3 control-label">Position</label>
 
                     <div class="col-sm-9">
-                      <select class="form-control" name="position" id="edit_position">
-                        <option selected id="position_val"></option>
-                        
+                      <select class="form-control" name="position_id" id="edit_position" >
+                        @foreach($positions as $pos)
+                        <option value="{{ $pos->id }}" 
+                          @if($emp->position_id === $pos->id)
+                          selected="selected"
+                          @endif
+                          >{{ $pos->position }}</option>
+                        @endforeach
                       </select>
                     </div>
                 </div>
@@ -168,12 +214,64 @@
                     <label for="edit_schedule" class="col-sm-3 control-label">Schedule</label>
 
                     <div class="col-sm-9">
-                      <select class="form-control" id="edit_schedule" name="schedule">
-                        <option selected id="schedule_val"></option>
-                        
+                      <select class="form-control" id="edit_schedule" name="schedule_id" >
+                        @foreach($schedules as $scd)
+                        <option value="{{ $scd->id }}"
+                          @if($scd->id === $emp->schedule_id)
+                            selected="selected"
+                          @endif
+                        >{{ $scd->start_time ." - " . $scd->end_time }}</option>
+                        @endforeach
                       </select>
                     </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="edit_address" class="col-sm-3 control-label">Address <span class="text-danger">*</span></label>
+
+                  <div class="col-sm-9">
+                    <textarea class="form-control" name="address" id="edit_address" required></textarea>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="edit_address" class="col-sm-3 control-label">Education</label>
+
+                <div class="col-sm-9">
+                  <textarea class="form-control" name="education" id="edit_ecducation"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="edit_address" class="col-sm-3 control-label">Skill</label>
+
+              <div class="col-sm-9">
+                <textarea class="form-control" name="skil" id="edit_skill"></textarea>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="edit_rank" class="col-sm-3 control-label">Rank</label>
+
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="edit_rank" name="rank">
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="edit_status" class="col-sm-3 control-label">Status <span class="text-danger">*</span></label>
+
+          <div class="col-sm-9">
+            <select name="status" id="edit_status" class="form-control">
+              <option value="pro-Active">Pro-Active</option>
+              <option value="active">Active</option>
+              <option value="resigned">Resigned</option>
+            </select>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="edit_resign_date" class="col-sm-3 control-label">Resigned Date</label>
+
+        <div class="col-sm-9">
+          <input type="date" class="form-control" id="edit_resign_date" name="resign_date">
+        </div>
+    </div>
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -194,11 +292,13 @@
             	<h4 class="modal-title"><b><span class="employee_id"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="employee_delete.php">
+            	<form class="form-horizontal" method="POST" id="del_emp_action">
+                @csrf
+                @method('DELETE')
             		<input type="hidden" class="empid" name="id">
             		<div class="text-center">
 	                	<p>DELETE EMPLOYEE</p>
-	                	<h2 class="bold del_employee_name"></h2>
+	                	<h4 class="bold " id ="del_emp"></h4>
 	            	</div>
           	</div>
           	<div class="modal-footer">
@@ -220,13 +320,18 @@
               <h4 class="modal-title"><b><span class="del_employee_name"></span></b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="employee_edit_photo.php" enctype="multipart/form-data">
+              <form class="form-horizontal" method="POST" id="edit_emp_photo_action" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <input type="hidden" class="empid" name="id">
                 <div class="form-group">
                     <label for="photo" class="col-sm-3 control-label">Photo</label>
 
                     <div class="col-sm-9">
-                      <input type="file" id="photo" name="photo" required>
+                      <div style="background-color: grey;border-box:2px; border-color:black; border-radius:8px; width:100px; height:100px;">
+                        <img style="height:100px" id="src_photo" >
+                      </div><br>  
+                      <input type="file" id="edit_photo" name="photo">
                     </div>
                 </div>
             </div>

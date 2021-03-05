@@ -8,20 +8,39 @@
             	<h4 class="modal-title"><b>Add Salary</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="cashadvance_add.php">
+            	<form class="form-horizontal" method="POST" action="/add_sal">
+					@csrf
           		  <div class="form-group">
-                  	<label for="employee" class="col-sm-3 control-label">Employee ID</label>
+                  	<label for="employee" class="hidden col-sm-3 control-label">Employee ID</label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="employee" name="employee" required>
+                    	<input type="text" class="hidden form-control" id="add_employee_id" name="employee_id" required readonly>
                   	</div>
                 </div>
                 <div class="form-group">
                     <label for="amount" class="col-sm-3 control-label">Amount</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="amount" name="amount" required>
+                      <input type="text" class="form-control" id="salary" name="salary" required>
                     </div>
+                </div>
+				<div class="form-group">
+                    <label for="edit_effective_date" class="col-sm-3 control-label">Effective Date <span class="text-danger">*</span></label>
+
+                    <div class="col-sm-9">
+                      <div class="date">
+                        <input type="date" class="form-control" id="add_effective_date" name="effective_date" required>
+                      </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="edit_end_date" class="col-sm-3 control-label">End Date <span class="text-danger">*</span></label>
+
+                    <div class="col-sm-9"> 
+						<div class="date">
+						  <input type="date" class="form-control" id="add_end_date" name="end_date" required>
+						</div>
+					  </div>
                 </div>
           	</div>
           	<div class="modal-footer">
@@ -43,14 +62,34 @@
             	<h4 class="modal-title"><b><span class="date"></span> - <span class="employee_name"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="cashadvance_edit.php">
-            		<input type="hidden" class="caid" name="id">
+            	<form class="form-horizontal" method="POST" id="edit_sal_action">
+					@csrf
+					@method('PUT')
+            		<input type="hidden" class="caid" id="edit_employee_id" name="employee_id">
                 <div class="form-group">
-                    <label for="edit_amount" class="col-sm-3 control-label">Amount</label>
+                    <label for="edit_salary" class="col-sm-3 control-label">Amount</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_amount" name="amount" required>
+                      <input type="text" class="form-control" id="edit_salary" name="salary" required>
                     </div>
+                </div>
+				<div class="form-group">
+                    <label for="edit_effective_date" class="col-sm-3 control-label">Effective Date <span class="text-danger">*</span></label>
+
+                    <div class="col-sm-9">
+                      <div class="date">
+                        <input type="date" class="form-control" id="edit_effective_date" name="effective_date" required>
+                      </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="edit_end_date" class="col-sm-3 control-label">End Date <span class="text-danger">*</span></label>
+
+                    <div class="col-sm-9"> 
+						<div class="date">
+						  <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
+						</div>
+					  </div>
                 </div>
           	</div>
           	<div class="modal-footer">
@@ -72,11 +111,13 @@
             	<h4 class="modal-title"><b><span class="date"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="cashadvance_delete.php">
-            		<input type="hidden" class="caid" name="id">
+            	<form class="form-horizontal" method="POST" id="del_sal_action">
+					@csrf
+					@method('DELETE')
+            		<input type="hidden" class="caid" id="del_employee_id" name="employee_id">
             		<div class="text-center">
 	                	<p>DELETE SALARY</p>
-	                	<h2 class="employee_name bold"></h2>
+	                	<h4 class=" bold" id="del_salary"></h4>
 	            	</div>
           	</div>
           	<div class="modal-footer">

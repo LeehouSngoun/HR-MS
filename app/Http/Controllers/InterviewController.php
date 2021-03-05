@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class InterviewController extends Controller
 {
     function index(){
-        return view('interview');
+        return view('Interview.interview');
     }
 }

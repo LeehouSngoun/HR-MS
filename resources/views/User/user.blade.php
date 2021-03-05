@@ -10,12 +10,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Employee List
+        Add New User
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Employees</li>
-        <li class="active">Employee List</li>
+        
+        <li class="active">Add New User</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -32,11 +32,9 @@
                 <thead>
                   <th>Employee ID</th>
                   <th>Photo</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Position</th>
-                  <th>Schedule</th>
-                  <th>BirthDate</th>
+                  <th>User Name</th>
+                  <th>Password</th>
+                  <th>Role</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>
@@ -44,8 +42,6 @@
                         <tr>
                           <td></td>
                           <td><img src="{{ asset('images/profile.jpg') }}" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id=""><span class="fa fa-edit"></span></a></td>
-                          <td></td>
-                          <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
@@ -65,7 +61,7 @@
   </div>
     
 
-  @include('layouts.employee_modal')
+  @include('layouts.user_modal')
 </div>
 @include('layouts.scripts')
 <script>

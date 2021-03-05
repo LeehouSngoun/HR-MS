@@ -8,10 +8,11 @@
             	<h4 class="modal-title"><b>Add Department</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_add.php">
+            	<form class="form-horizontal" method="POST" action="/add_dep">
+					@csrf
           		  
                  <div class="form-group">
-                    <label for="rate" class="col-sm-3 control-label">Department</label>
+                    <label for="rate" class="col-sm-3 control-label">Department <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
 						<input type="text" class="form-control" id="department" name="department" required>
@@ -34,41 +35,20 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b><span class="employee_name"></span></b></h4>
+            	<h4 class="modal-title">Change Department<b><span class="employee_name"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_edit.php">
+            	<form class="form-horizontal" method="POST" action="/edit_dep/{{ $dep->id }}">
+					@csrf
+					@method('PUT')
             		<input type="hidden" class="otid" name="id">
                 <div class="form-group">
-                    <label for="datepicker_edit" class="col-sm-3 control-label">Date</label>
-
-                    <div class="col-sm-9"> 
-                      <div class="date">
-                        <input type="text" class="form-control" id="datepicker_edit" name="date" required>
-                      </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hours_edit" class="col-sm-3 control-label">No. of Hours</label>
+                    <label for="dep_edit" class="col-sm-3 control-label">Department <span class="text-danger">*</span></label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="hours_edit" name="hours">
+                      <input type="text" class="form-control" id="dep_edit" name="dep_edit" required>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="mins_edit" class="col-sm-3 control-label">No. of Mins</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="mins_edit" name="mins">
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <label for="rate_edit" class="col-sm-3 control-label">Rate</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="rate_edit" name="rate" required>
-                    </div>
-                </div>
+                </div>              
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -89,10 +69,11 @@
             	<h4 class="modal-title"><b><span id="overtime_date"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_delete.php">
+            	<form class="form-horizontal"  action="/delete_dep/{{ $dep->id }}">
+					@csrf
             		<input type="hidden" class="otid" name="id">
             		<div class="text-center">
-	                	<p>DELETE OVERTIME</p>
+	                	<p id="dep_del"></p>
 	                	<h2 class="employee_name bold"></h2>
 	            	</div>
           	</div>
