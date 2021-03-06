@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 
 use Illuminate\Http\Request;
 use App\Employee;
@@ -11,22 +12,26 @@ use App\Overtime;
 
 class PayrollController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index(){
         $payrolls = Payroll::all();
-        // dd($payrolls);
         return view("Payroll.payroll",compact("payrolls"));
     }
 
     
 
     function generate(){
+        $user = Auth::user()->name;
         $new_payroll = new Payroll();
         $new_payroll->month = date("M");
         $new_payroll->year = date("Y");
-        $new_payroll->generated_by = 'Rachana';
-        // $new_payroll->date= '2021-03-03';
+        $new_payroll->generated_by = $user;
+        // $new_payroll->date= date("D-M-Y");
         $new_payroll->save();
-        // dd($new_payroll->id);
         $employees = Employee::where('status', '!=', 'Resigned')->orWhereNull('status')->get();
         //payroll
         $payroll = Payroll::find($new_payroll->id);

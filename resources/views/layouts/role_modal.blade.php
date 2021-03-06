@@ -8,7 +8,7 @@
             	<h4 class="modal-title"><b>Add Role</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_add.php">
+            	<form class="form-horizontal" action="/add_role">
           		  
                  <div class="form-group">
                     <label for="rate" class="col-sm-3 control-label">Role</label>
@@ -37,36 +37,15 @@
             	<h4 class="modal-title"><b><span class="employee_name"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_edit.php">
+            	<form class="form-horizontal" method="POST" id="edit_role_action">
+					@csrf
+					@method('PUT')
             		<input type="hidden" class="otid" name="id">
                 <div class="form-group">
-                    <label for="datepicker_edit" class="col-sm-3 control-label">Date</label>
-
-                    <div class="col-sm-9"> 
-                      <div class="date">
-                        <input type="text" class="form-control" id="datepicker_edit" name="date" required>
-                      </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="hours_edit" class="col-sm-3 control-label">No. of Hours</label>
+                    <label for="roll" class="col-sm-3 control-label">Role</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="hours_edit" name="hours">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="mins_edit" class="col-sm-3 control-label">No. of Mins</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="mins_edit" name="mins">
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <label for="rate_edit" class="col-sm-3 control-label">Rate</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="rate_edit" name="rate" required>
+                      <input type="text" class="form-control" id="role_edit" name="role">
                     </div>
                 </div>
           	</div>
@@ -89,10 +68,12 @@
             	<h4 class="modal-title"><b><span id="overtime_date"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="overtime_delete.php">
+            	<form class="form-horizontal" method="POST" id="delete_role_action" >
+					@csrf
+					@method('DELETE')
             		<input type="hidden" class="otid" name="id">
             		<div class="text-center">
-	                	<p>DELETE OVERTIME</p>
+	                	<p>DELETE THIS ROLL</p>
 	                	<h2 class="employee_name bold"></h2>
 	            	</div>
           	</div>

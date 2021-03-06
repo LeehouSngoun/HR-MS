@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class SalaryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function index($id){
         $employee = Employee::find($id);
         $salaries = Salary::all();

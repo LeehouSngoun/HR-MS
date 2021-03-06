@@ -66,6 +66,8 @@
                               data-mygender="{{ $emp->gender }}"
                               data-myidentity="{{ $emp->identity }}"
                               data-mycontact="{{ $emp->contact }}"
+                              data-mybankname="{{ $emp->bank_name }}"
+                              data-mybankaccount ="{{ $emp->bank_account }}"
                               data-myemail="{{ $emp->email }}"
                               data-myaddress="{{ $emp->address }}"
                               data-myeducation="{{ $emp->education }}"
@@ -116,6 +118,8 @@ $(function(){
   var identity = button.data('myidentity')
   var contact = button.data('mycontact')
   var email = button.data('myemail')
+  var bank_name = button.data('mybankname')
+  var bank_account = button.data('mybankaccount')
   var address = button.data('myaddress')
   var skill = button.data('myskill')
   var education = button.data('myeducation')
@@ -137,6 +141,8 @@ $(function(){
   modal.find('.modal-body #edit_email').val(email)
   modal.find('.modal-body #edit_address').val(address)
   modal.find('.modal-body #edit_skill').val(skill)
+  modal.find('.modal-body #edit_bank_name').val(bank_name)
+  modal.find('.modal-body #edit_bank_account').val(bank_account)
   modal.find('.modal-body #edit_education').val(education)
   modal.find('.modal-body #edit_rank').val(rank)
   modal.find('.modal-body #edit_status').val(status)

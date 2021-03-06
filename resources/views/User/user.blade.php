@@ -30,27 +30,29 @@
             <div class="box-body">
               <table id="example2" class="table table-bordered">
                 <thead>
-                  <th>Employee ID</th>
-                  <th>Photo</th>
                   <th>User Name</th>
-                  <th>Password</th>
                   <th>Role</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>
                   
+                  @forelse( $users as $user )
                         <tr>
-                          <td></td>
-                          <td><img src="{{ asset('images/profile.jpg') }}" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id=""><span class="fa fa-edit"></span></a></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>{{ $user->name }}</td>
+                          <td>{{ $user->role->role ?? null }}</td>
                           <td>
-                            <button class="btn btn-success btn-sm edit" data-id=""><i class="fa fa-edit"></i> Edit</button>
-                            <button class="btn btn-danger btn-sm delete" data-id=""><i class="fa fa-trash"></i> Delete</button>
+                            <button class="btn btn-success btn-sm " data-toggle="modal" data-target="#edit" 
+                            data-id="{{ $user->id }}"
+                            data-myname ="{{ $user->name }}"
+                            data-myemail ="{{ $user->email }}"
+                            data-myroleid = "{{ $user->role_id }}"
+                            ><i class="fa fa-edit"></i> Edit</button>
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" data-id="{{ $user->id }}"><i class="fa fa-trash"></i> Delete</button>
                           </td>
                         </tr>
-                      
+                        @empty
+
+                  @endforelse   
                 </tbody>
               </table>
             </div>
@@ -66,51 +68,27 @@
 @include('layouts.scripts')
 <script>
 $(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+  $('#edit').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var name = button.data('myname')
+  var role_id = button.data('myroleid')
+  var email = button.data('myemail') 
+  var id = button.data('id');
+  $('#edit_user_action').attr('action', '/edit_user/'+id)
+  var modal = $(this)
+  modal.find('.modal-body #edit_name').val(name)
+  modal.find('.modal-body #edit_role_id').val(role_id)
+  modal.find('.modal-body #edit_email').val(email)
+})
 
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.photo').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
+$('#delete').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var id = button.data('id');
+  $('#del_user_action').attr('action', '/delete_user/'+id)
+  var modal = $(this)
+  // modal.find('.modal-body #delete_user').text('Delete ' '?')
+})
 });
-
-function getRow(id){
-  
-  $.ajax({
-    type: 'POST',
-    url: 'employee_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('.empid').val(response.empid);
-      $('.employee_id').html(response.employee_id);
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);
-      $('#employee_name').html(response.firstname+' '+response.lastname);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_address').val(response.address);
-      $('#datepicker_edit').val(response.birthdate);
-      $('#edit_contact').val(response.contact_info);
-      $('#gender_val').val(response.gender).html(response.gender);
-      $('#position_val').val(response.position_id).html(response.description);
-      $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
-    }
-  });
-}
 </script>
 </body>
 </html>

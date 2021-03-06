@@ -94,6 +94,20 @@
                   <input type="email" class="form-control" id="email" name="email" required>
                 </div>
             </div>
+            <div class="form-group">
+              <label for="edit_bank_name" class="col-sm-3 control-label">Bank Name </label>
+
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="add_bank_name" name="bank_name" >
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="edit_bank_account" class="col-sm-3 control-label">Bank Account </label>
+
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="add_bank_account" name="account" >
+            </div>
+        </div>
                 <div class="form-group">
                   <label for="address" class="col-sm-3 control-label">Address <span class="text-danger">*</span></label>
 
@@ -177,6 +191,21 @@
                       <input type="text" class="form-control" id="edit_contact" name="contact" required>
                     </div>
                 </div>
+                <div class="form-group">
+                  <label for="edit_bank_name" class="col-sm-3 control-label">Bank Name </label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="edit_bank_name" name="bank_name" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="edit_bank_account" class="col-sm-3 control-label">Bank Account </label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="edit_bank_account" name="account" >
+                </div>
+            </div>
+
                 <div class="form-group">
                   <label for="edit_email" class="col-sm-3 control-label">Email <span class="text-danger">*</span></label>
 

@@ -11,6 +11,11 @@ use App\Overtime;
 
 class PayrolldetailController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index($id){
         $payroll_details = Payroll_detail::where('payroll_id',$id)->get();
         
@@ -28,9 +33,6 @@ class PayrolldetailController extends Controller
                         $total_overtime += $overtime->hour;
                     }
                     
-
-                
-        // dd($total_overtime);
         return view("Payroll.payrolldetaileachprint" , compact("payroll_detail","total_overtime","payroll"));
     }
 

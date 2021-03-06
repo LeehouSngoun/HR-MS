@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class OvertimeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index($id){
-        // $overtimes =DB::table('overtimes')
-        //             ->join('employees', 'overtimes.Emp_ID', '=','employees.id')
-        //             ->get();
         $overtimes = Overtime::all();
         $employee_id = $overtimes->pluck('employee.id');
         $filters=null;
@@ -25,12 +28,6 @@ class OvertimeController extends Controller
             }
         }
         $employee = Employee::find($id);
-        // dd($employee);
-        // $last_date=null;
-        // if($filters!=null){
-        //      $last_date= $filters->first();
-        // }
-        // dd($filters);
         return view('OverTime.overtime', compact("filters","employee"));
     }
 
@@ -44,14 +41,12 @@ class OvertimeController extends Controller
         $overtimes->reason = $request->reason;
         $overtimes->status ="unpaid";
         $overtimes->save();
-        // dd($request);
         return redirect('overtime/' . $request->employee_id);
     }
 
     function edit($id, Request $request){
            
         $overtimes = Overtime::find($id);
-        // dd($id);
         $overtimes->hour = $request->hour;
         $overtimes->rate = $request->rate;
         $overtimes->start_date = $request->start_date;
@@ -62,7 +57,6 @@ class OvertimeController extends Controller
     }
 
     function delete($id, Request $request){
-        // dd($request);
         Overtime::destroy($id);
         return redirect('overtime/'.$request->employee_id);
     }

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class SchedulesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function index(){
         $schedules = Schedule::all();
         return view('schedule.schedule' ,compact('schedules'));
@@ -18,14 +23,12 @@ class SchedulesController extends Controller
         $scd->name = $request->name;
         $scd->start_time = $request->start_time;
         $scd->end_time=$request->end_time;
-        // dd($scd);
         $scd->save();
        
         return redirect()->route("schedule.all");
     }
 
     function edit($id, Request $request){
-        // dd($request);
         $scd = Schedule::find($id);
         $scd->name = $request->name;
         $scd->start_time = $request->start_time;

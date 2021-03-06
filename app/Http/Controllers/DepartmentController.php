@@ -7,6 +7,11 @@ use App\Department;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index(){
         $departments = Department::all();
         // dd($departments);

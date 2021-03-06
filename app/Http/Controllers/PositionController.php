@@ -9,26 +9,26 @@ use Illuminate\Support\Facades\DB;
 
 class PositionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index(){
-        // $positions = Position::all();
         $positions = Position::all();
-                    // dd($positions);
         $departments = Department::all();
         return view('Position.position', compact("positions","departments"));
     }
 
     function insert(Request $request){
         $positions = new Position();
-        // $departments = new Department();
         $positions->position = $request->position;
         $positions->department_id =$request->department_id;
         $positions->save();
-        // dd($request);
         return redirect()->route("position.all");
     }
 
     function edit($id , Request $request){
-        // dd($request);
         $positions = Position::find($id);
         $positions->position = $request->position;
         $positions->department_id = $request->department_id;
@@ -38,8 +38,6 @@ class PositionController extends Controller
     }
 
     function delete($id){
-        // Position::destroy($id);
-        // dd($id);
         $pos = Position::find($id);
         $pos->delete();
         return redirect()->route("position.all");

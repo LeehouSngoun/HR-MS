@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header with-border">
+            <div id="box-header" class="box-header with-border">
               
             </div>
             <div class="box-body">
@@ -155,6 +155,9 @@
     .box-body{-webkit-print-color-adjust: exact;}
     
   #printPageButton {
+    display: none;
+  }
+  #box-head{
     display: none;
   }
   #main-footer{

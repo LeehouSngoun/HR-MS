@@ -10,7 +10,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Salary List of {{ $employee->first_name .' ' . $employee->last_name .' ID: PAPA'. $employee->id}}
+        Salary List of {{ $employee->first_name .' ' . $employee->last_name .' ID: PAPA-'. sprintf("%05d",$employee->id)}}
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>

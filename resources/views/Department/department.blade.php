@@ -62,25 +62,13 @@
 @include('layouts.scripts')
 <script>
 $(function(){
-  // $('.edit').click(function(e){
-  //   e.preventDefault();
-  //   $('#edit').modal('show');
-  //   var id = $(this).data('myDep');
-  //   getRow(id);
-  // });
+ 
   $('#edit').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) 
   var department = button.data('mydepartment') 
   var modal = $(this)
   modal.find('.modal-body #dep_edit').val(department)
 })
-
-  // $('.delete').click(function(e){
-  //   e.preventDefault();
-  //   $('#delete').modal('show');
-  //   var id = $(this).data('id');
-  //   getRow(id);
-  // });
 
   $('#delete').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) 
@@ -91,29 +79,6 @@ $(function(){
 
 });
 
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'overtime_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      var time = response.hours;
-      var split = time.split('.');
-      var hour = split[0];
-      var min = '.'+split[1];
-      min = min * 60;
-      console.log(min);
-      $('.employee_name').html(response.firstname+' '+response.lastname);
-      $('.otid').val(response.otid);
-      $('#datepicker_edit').val(response.date_overtime);
-      $('#overtime_date').html(response.date_overtime);
-      $('#hours_edit').val(hour);
-      $('#mins_edit').val(min);
-      $('#rate_edit').val(response.rate);
-    }
-  });
-}
 </script>
 </body>
 </html>

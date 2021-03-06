@@ -36,11 +36,22 @@
                   <th>Tools</th>
                 </thead>
                 <tbody>
-                  <td></td>
+                  @foreach ( $roles as $role)
+                     <tr>
+                  
+                  <td>{{ $role->role }}</td>
                   <td>
-                    <button class="btn btn-success btn-sm edit" data-id=""><i class="fa fa-edit"></i> Edit</button>
-                    <button class="btn btn-danger btn-sm delete" data-id=""><i class="fa fa-trash"></i> Delete</button>
+                    <button class="btn btn-success btn-sm " data-toggle="modal" data-target="#edit"
+                     data-id="{{ $role->id }}"
+                     data-myrole="{{ $role->role }}"
+                     ><i class="fa fa-edit"></i> Edit</button>
+                    <button class="btn btn-danger btn-sm "data-toggle="modal" data-target="#delete"
+                     data-id="{{ $role->id }}"
+                     data-myrole="{{ $role->role }}"
+                     ><i class="fa fa-trash"></i> Delete</button>
                   </td>
+                </tr> 
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -55,45 +66,28 @@
 </div>
 @include('layouts.scripts')
 <script>
+
 $(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+ 
+ $('#edit').on('show.bs.modal', function (event) {
+ var button = $(event.relatedTarget) 
+ var role = button.data('myrole') 
+ var id = button.data('id');
+    $('#edit_role_action').attr('action', '/edit_role/'+id)
+ var modal = $(this)
+ modal.find('.modal-body #role_edit').val(role)
+})
 
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+ $('#delete').on('show.bs.modal', function (event) {
+ var button = $(event.relatedTarget) 
+ var role = button.data('myrole') 
+ var id = button.data('id');
+    $('#delete_role_action').attr('action', '/delete_role/'+id)
+ var modal = $(this)
+ modal.find('.modal-body #dep_role').text('Delete ' + role + '?')
+})
+
 });
-
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'overtime_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      var time = response.hours;
-      var split = time.split('.');
-      var hour = split[0];
-      var min = '.'+split[1];
-      min = min * 60;
-      console.log(min);
-      $('.employee_name').html(response.firstname+' '+response.lastname);
-      $('.otid').val(response.otid);
-      $('#datepicker_edit').val(response.date_overtime);
-      $('#overtime_date').html(response.date_overtime);
-      $('#hours_edit').val(hour);
-      $('#mins_edit').val(min);
-      $('#rate_edit').val(response.rate);
-    }
-  });
-}
 </script>
 </body>
 </html>
